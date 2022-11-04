@@ -9,3 +9,6 @@ CREATE table IF NOT EXISTS flagmania_users
     constraint user_pk PRIMARY KEY (id)
     );
 --rollback DROP TABLE flagmania_users;
+
+ALTER TABLE flagmania_users DROP COLUMN points;
+ALTER TABLE flagmania_users ADD points bigint DEFAULT 0;

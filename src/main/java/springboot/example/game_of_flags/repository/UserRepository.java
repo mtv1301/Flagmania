@@ -6,4 +6,6 @@ import springboot.example.game_of_flags.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+
+    Optional<User> getUserById(Long id);
 }

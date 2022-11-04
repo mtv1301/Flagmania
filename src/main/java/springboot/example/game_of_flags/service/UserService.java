@@ -28,6 +28,15 @@ public class UserService {
         }
     }
 
+    public void changePointsFoUser(Long userId, Long idFlag, Long idAnswer) {
+        var user = userRepository.getUserById(userId).get();
+        if(idAnswer.equals(idFlag)){
+            var points = user.getPoints();
+            user.setPoints(points + 1);
+            userRepository.save(user);
+        }
+    }
+
     private User prepareUser(UserRequestDto userRequestDto) {
         User user = new User();
         user.setName(userRequestDto.getName());
