@@ -37,6 +37,11 @@ public class UserService {
         }
     }
 
+    public int getUserPoints(Long userId) {
+        var user = userRepository.getUserById(userId).get();
+        return user.getPoints();
+    }
+
     private User prepareUser(UserRequestDto userRequestDto) {
         User user = new User();
         user.setName(userRequestDto.getName());

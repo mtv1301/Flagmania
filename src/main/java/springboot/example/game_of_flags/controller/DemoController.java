@@ -8,6 +8,6 @@ public class DemoController {
 
     @GetMapping("/demo")
     public String runDemo(){
-        return "Hello!";
+        return "I can start use swagger!";
     }
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ public class FlagController {
 
     @RequestMapping(value = "/next", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Show variants of flags")
     public ResponseEntity<Object> startGame() {
         int index = 0;
         ArrayList<String> listCountries = new ArrayList<>();
@@ -43,7 +46,9 @@ public class FlagController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> getFlag(@RequestParam String path) throws IOException {
+    @ApiOperation(value = "Get flag")
+    public ResponseEntity<Object> getFlag(@RequestParam @ApiParam(value = "path of flag") String path)
+            throws IOException {
         ClassPathResource imgFile = new ClassPathResource(path);
         byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
         return ResponseEntity
@@ -53,7 +58,9 @@ public class FlagController {
     }
 
     @GetMapping("/countries")
-    public ResponseEntity<List<String>> getCountryByFlag(@RequestParam("codeFlags") List<String> codeFlags) {
+    @ApiOperation(value = "Get name of countries")
+    public ResponseEntity<List<String>> getCountryByFlag(
+            @RequestParam @ApiParam(value = "flags code") List<String> codeFlags) {
         ArrayList<String> countries = new ArrayList<>();
         for (String cf: codeFlags) {
             Locale obj = new Locale("", cf);
