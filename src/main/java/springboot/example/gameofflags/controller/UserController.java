@@ -1,4 +1,4 @@
-package springboot.example.game_of_flags.controller;
+package springboot.example.gameofflags.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import springboot.example.game_of_flags.dto.mapper.UserMapper;
-import springboot.example.game_of_flags.exception.DuplicateEmailException;
-import springboot.example.game_of_flags.model.RegistrationRequest;
-import springboot.example.game_of_flags.service.UserService;
+import springboot.example.gameofflags.dto.ChangePointsRequest;
+import springboot.example.gameofflags.dto.mapper.UserMapper;
+import springboot.example.gameofflags.exception.DuplicateEmailException;
+import springboot.example.gameofflags.dto.RegistrationRequest;
+import springboot.example.gameofflags.service.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -31,14 +32,13 @@ public class UserController {
     }
 
     @PutMapping("/points")
-    public void countPointsForUser(@RequestParam Long idFlag,
-                                   @RequestParam Long idAnswer,
-                                   @RequestParam Long userId) {
-        userService.changePointsFoUser(userId, idFlag, idAnswer);
+    public void countPointsForUser(@RequestBody ChangePointsRequest request)
+            throws Exception {
+        userService.changePointsFoUser(userMapper.toPointsRequestDto(request));
     }
 
     @GetMapping("/{id}")
-    public int getUserPoints(@PathVariable Long id) {
+    public int getUserPoints(@PathVariable Long id) throws Exception {
         return userService.getUserPoints(id);
     }
 }

@@ -1,8 +1,8 @@
-package springboot.example.game_of_flags.repository;
+package springboot.example.gameofflags.repository;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import springboot.example.game_of_flags.model.User;
+import springboot.example.gameofflags.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);

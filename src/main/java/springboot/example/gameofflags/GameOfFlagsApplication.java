@@ -1,4 +1,4 @@
-package springboot.example.game_of_flags;
+package springboot.example.gameofflags;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

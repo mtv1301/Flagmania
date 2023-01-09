@@ -1,14 +1,16 @@
-package springboot.example.game_of_flags.service;
+package springboot.example.gameofflags.service;
 
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import springboot.example.game_of_flags.dto.UserRequestDto;
-import springboot.example.game_of_flags.exception.DuplicateEmailException;
-import springboot.example.game_of_flags.model.User;
-import springboot.example.game_of_flags.repository.UserRepository;
+import springboot.example.gameofflags.dto.PointsRequestDto;
+import springboot.example.gameofflags.dto.UserRequestDto;
+import springboot.example.gameofflags.exception.DuplicateEmailException;
+import springboot.example.gameofflags.exception.UserNotFoundException;
+import springboot.example.gameofflags.model.User;
+import springboot.example.gameofflags.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -28,17 +30,22 @@ public class UserService {
         }
     }
 
-    public void changePointsFoUser(Long userId, Long idFlag, Long idAnswer) {
-        var user = userRepository.getUserById(userId).get();
-        if(idAnswer.equals(idFlag)){
-            var points = user.getPoints();
-            user.setPoints(points + 1);
-            userRepository.save(user);
+    public void changePointsFoUser(PointsRequestDto requestDto) throws UserNotFoundException {
+        Optional<User> user = userRepository.getUserById(requestDto.getUserId());
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("User with id: " + requestDto.getUserId() + " not found.");
+        } else {
+            if(requestDto.getIdAnswer().equals(requestDto.getIdFlag())) {
+                var points = user.get().getPoints();
+                user.get().setPoints(points + 1);
+                userRepository.save(user.get());
+            }
         }
     }
 
-    public int getUserPoints(Long userId) {
-        var user = userRepository.getUserById(userId).get();
+    public int getUserPoints(Long userId) throws Exception {
+        var user = userRepository.getUserById(userId).orElseThrow(
+                () -> new UserNotFoundException("User with id - "  + userId + " not found"));
         return user.getPoints();
     }
 

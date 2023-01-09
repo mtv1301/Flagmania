@@ -1,4 +1,4 @@
-package springboot.example.game_of_flags.controller;
+package springboot.example.gameofflags.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

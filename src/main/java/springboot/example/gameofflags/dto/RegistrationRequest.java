@@ -1,4 +1,4 @@
-package springboot.example.game_of_flags.model;
+package springboot.example.gameofflags.dto;
 
 import lombok.Data;
 
