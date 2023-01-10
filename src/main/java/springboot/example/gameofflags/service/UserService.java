@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import springboot.example.gameofflags.dto.PointsRequestDto;
 import springboot.example.gameofflags.dto.UserRequestDto;
 import springboot.example.gameofflags.exception.DuplicateEmailException;
-import springboot.example.gameofflags.exception.UserNotFoundException;
+import springboot.example.gameofflags.exception.EntityNotFoundException;
 import springboot.example.gameofflags.model.User;
 import springboot.example.gameofflags.repository.UserRepository;
 
@@ -30,22 +30,19 @@ public class UserService {
         }
     }
 
-    public void changePointsFoUser(PointsRequestDto requestDto) throws UserNotFoundException {
-        Optional<User> user = userRepository.getUserById(requestDto.getUserId());
-        if (user.isEmpty()) {
-            throw new UserNotFoundException("User with id: " + requestDto.getUserId() + " not found.");
-        } else {
-            if(requestDto.getIdAnswer().equals(requestDto.getIdFlag())) {
-                var points = user.get().getPoints();
-                user.get().setPoints(points + 1);
-                userRepository.save(user.get());
-            }
+    public void changePointsFoUser(PointsRequestDto requestDto) throws EntityNotFoundException {
+        User user = userRepository.getUserById(requestDto.getUserId()).orElseThrow(
+                () -> new EntityNotFoundException("User with id: "  + requestDto.getUserId() + " not found"));
+        if(requestDto.getAnswerId().equals(requestDto.getFlagId())){
+            int points = user.getPoints();
+            user.setPoints(points + 1);
+            userRepository.save(user);
         }
     }
 
     public int getUserPoints(Long userId) throws Exception {
-        var user = userRepository.getUserById(userId).orElseThrow(
-                () -> new UserNotFoundException("User with id - "  + userId + " not found"));
+        User user = userRepository.getUserById(userId).orElseThrow(
+                () -> new EntityNotFoundException("User with id - "  + userId + " not found"));
         return user.getPoints();
     }
 

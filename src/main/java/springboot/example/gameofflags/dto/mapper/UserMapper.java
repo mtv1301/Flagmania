@@ -1,10 +1,10 @@
 package springboot.example.gameofflags.dto.mapper;
 
 import org.springframework.stereotype.Component;
-import springboot.example.gameofflags.dto.ChangePointsRequest;
+import springboot.example.gameofflags.dto.request.ChangePointsRequest;
 import springboot.example.gameofflags.dto.PointsRequestDto;
 import springboot.example.gameofflags.dto.UserRequestDto;
-import springboot.example.gameofflags.dto.RegistrationRequest;
+import springboot.example.gameofflags.dto.request.RegistrationRequest;
 
 @Component
 public class UserMapper {
@@ -19,8 +19,8 @@ public class UserMapper {
     public PointsRequestDto toPointsRequestDto(ChangePointsRequest request){
         PointsRequestDto pointsRequestDto = new PointsRequestDto();
         pointsRequestDto.setUserId(request.getUserId());
-        pointsRequestDto.setIdFlag(request.getIdFlag());
-        pointsRequestDto.setIdAnswer(request.getIdAnswer());
+        pointsRequestDto.setFlagId(request.getFlagId());
+        pointsRequestDto.setAnswerId(request.getAnswerId());
         return pointsRequestDto;
     }
 }

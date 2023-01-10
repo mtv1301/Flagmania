@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import springboot.example.gameofflags.dto.ChangePointsRequest;
+import springboot.example.gameofflags.dto.request.ChangePointsRequest;
 import springboot.example.gameofflags.dto.mapper.UserMapper;
 import springboot.example.gameofflags.exception.DuplicateEmailException;
-import springboot.example.gameofflags.dto.RegistrationRequest;
+import springboot.example.gameofflags.dto.request.RegistrationRequest;
 import springboot.example.gameofflags.service.UserService;
 
 @RestController

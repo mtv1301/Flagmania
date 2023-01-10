@@ -1,4 +1,4 @@
-package springboot.example.gameofflags.dto;
+package springboot.example.gameofflags.dto.request;
 
 import lombok.Data;
 

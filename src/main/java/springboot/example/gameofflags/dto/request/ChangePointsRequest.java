@@ -1,9 +1,9 @@
-package springboot.example.gameofflags.dto;
+package springboot.example.gameofflags.dto.request;
 
 import lombok.Data;
 
 @Data
-public class PointsRequestDto {
+public class ChangePointsRequest {
     private Long flagId;
     private Long answerId;
     private Long userId;
