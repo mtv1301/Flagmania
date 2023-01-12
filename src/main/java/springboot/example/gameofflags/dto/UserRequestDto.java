@@ -1,6 +1,7 @@
 package springboot.example.gameofflags.dto;
 
 import lombok.Data;
+import springboot.example.gameofflags.validation.Email;
 
 @Data
 public class UserRequestDto {
