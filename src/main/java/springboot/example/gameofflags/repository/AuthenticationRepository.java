@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import springboot.example.gameofflags.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
-
-    Optional<User> getUserById(Long id);
+public interface AuthenticationRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmailAndPassword(String email, String password);
 }
