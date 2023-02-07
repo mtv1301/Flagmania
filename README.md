@@ -11,6 +11,16 @@ It will be interesting! Try it!
 
 ## Running Locally 
 Three, two, one... Let's start!
+1. [Clone](git@github.com:mtv1301/Flagmania.git) project from git repository.
 
-1. [Clone](git@github.com:mtv1301/Flagmania.git) the project
-2. 
+2. Run the project with command:
+````
+$ docker-compose up
+````
+3. You can connect to the database using this information:
+````
+MYSQLDB_USER=root
+MYSQLDB_ROOT_PASSWORD=1234
+MYSQLDB_DATABASE=flagmania_users
+MYSQLDB_LOCAL_PORT=3307
+````
