@@ -17,10 +17,12 @@ Three, two, one... Let's start!
 ````
 $ docker-compose up
 ````
-3. You can connect to the database using this information:
+3. You can connect to database using this information:
 ````
 MYSQLDB_USER=root
 MYSQLDB_ROOT_PASSWORD=1234
 MYSQLDB_DATABASE=flagmania_users
 MYSQLDB_LOCAL_PORT=3307
 ````
+4. To get started with the Postman collections you will need to copy collections from files on git 
+   <br> *Flagmania_postman_collection.json*
