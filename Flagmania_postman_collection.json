@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "623738c3-d034-4f73-a120-4ac53803b3fd",
+		"name": "GameOfFlags",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17821827"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Change points for user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2hkYW5AZ21haWwuY29tIiwiaWF0IjoxNjc1NzU4NTUxLCJleHAiOjE2NzU3NjIxNTF9.xEaBHjOcA4SWo-WWmZkow2hpFFPr7EKeJt3NRqxb3_8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "idFlag",
+								"value": "10",
+								"disabled": true
+							},
+							{
+								"key": "idAnswer",
+								"value": "10",
+								"disabled": true
+							},
+							{
+								"key": "userId",
+								"value": "7",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"flagId\" : 10,\n    \"answerId\" : 10,\n    \"userId\" : 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:6868/users/points",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"users",
+								"points"
+							]
+						},
+						"description": "add points for user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user points",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:6868/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"users",
+								"2"
+							]
+						},
+						"description": "get user's point"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "flags",
+			"item": [
+				{
+					"name": "Get flags (start game)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2hkYW5AZ21haWwuY29tIiwiaWF0IjoxNjc1NzU4NTUxLCJleHAiOjE2NzU3NjIxNTF9.xEaBHjOcA4SWo-WWmZkow2hpFFPr7EKeJt3NRqxb3_8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:6868/flags/next",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"flags",
+								"next"
+							]
+						},
+						"description": "get flags for game"
+					},
+					"response": []
+				},
+				{
+					"name": "Get flag by path",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/flags?path=flags/BE.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"flags"
+							],
+							"query": [
+								{
+									"key": "path",
+									"value": "flags/BE.png"
+								}
+							]
+						},
+						"description": "get picture"
+					},
+					"response": []
+				},
+				{
+					"name": "Get name of country by code flag",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2hkYW5AZ21haWwuY29tIiwiaWF0IjoxNjc1NzU4NTUxLCJleHAiOjE2NzU3NjIxNTF9.xEaBHjOcA4SWo-WWmZkow2hpFFPr7EKeJt3NRqxb3_8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:6868/flags/countries?codeFlags=BG,AU,AT,BE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"flags",
+								"countries"
+							],
+							"query": [
+								{
+									"key": "codeFlags",
+									"value": "BG,AU,AT,BE"
+								}
+							]
+						},
+						"description": "get name of countries"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Register new user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"Bodan\",\n    \"email\" : \"bohdan@gmail.com\",\n    \"password\" : \"bohdan123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:6868/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"bohdan@gmail.com\",\n    \"password\" : \"bohdan123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:6868/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6868",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
