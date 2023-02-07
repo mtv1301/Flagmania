@@ -1,7 +1,12 @@
 package springboot.example.gameofflags.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +24,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    private Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("USER"));
+        return authorities;
+    }
+
     @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -27,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         org.springframework.security.core.userdetails.User.UserBuilder builder =
                 org.springframework.security.core.userdetails.User.withUsername(email);
         builder.password(user.getPassword());
+        builder.authorities(getAuthorities());
         return builder.build();
     }
 }

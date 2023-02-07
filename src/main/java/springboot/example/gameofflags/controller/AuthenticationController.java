@@ -24,16 +24,15 @@ public class AuthenticationController {
     @Autowired
     private final UserService userService;
     @Autowired
-    private final AuthenticationService authenticationService;
-    @Autowired
     private final UserMapper userMapper;
     @Autowired
     private final JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    public AuthenticationController(UserService userService, AuthenticationService authenticationService,
+    public AuthenticationController(UserService userService,
                                     UserMapper userMapper, JwtTokenProvider jwtTokenProvider) {
         this.userService = userService;
-        this.authenticationService = authenticationService;
         this.userMapper = userMapper;
         this.jwtTokenProvider = jwtTokenProvider;
     }

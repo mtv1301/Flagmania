@@ -5,18 +5,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
 @Service
+@Log4j2
 public class FlagService {
     private final List<String> CODE_FLAGS = Arrays.asList("AD", "AF", "AG", "AL", "AO", "AR",
             "AT", "AU", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ",
             "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "DZ");
-    private static final Logger LOG = LoggerFactory.getLogger(FlagService.class);
 
     public List<String> startGame() {
         int index = 0;
@@ -30,13 +29,13 @@ public class FlagService {
         listCountries.add(CODE_FLAGS.get(index));
         List<String> entities = new ArrayList<>(listCountries);
         entities.add("flags/" + CODE_FLAGS.get(index) + ".png");
-        LOG.info("Random flags: " + entities + " are shown for user.");
+        log.info("Random flags: " + entities + " are shown for user.");
         return entities;
     }
 
     public byte[] getFlagByPath (String path) throws IOException {
         ClassPathResource imgFile = new ClassPathResource(path);
-        LOG.info("Flag with path: " + path + " are shown for user.");
+        log.info("Flag with path: " + path + " are shown for user.");
         return StreamUtils.copyToByteArray(imgFile.getInputStream());
     }
 
@@ -46,7 +45,7 @@ public class FlagService {
             Locale obj = new Locale("", cf);
             countries.add(obj.getDisplayCountry());
         }
-        LOG.info("Country name: " + countries + " are shown for user.");
+        log.info("Country name: " + countries + " are shown for user.");
         return countries;
     }
 }

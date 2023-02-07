@@ -22,7 +22,6 @@ public class FlagController {
     @RequestMapping(value = "/next", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<String>> startGame() {
-
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
@@ -32,7 +31,6 @@ public class FlagController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<byte[]> getFlag(@RequestParam String path)
             throws IOException {
-
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
@@ -41,7 +39,6 @@ public class FlagController {
 
     @GetMapping("/countries")
     public ResponseEntity<List<String>> getCountryByFlag(@RequestParam List<String> codeFlags) {
-
         return ResponseEntity
                 .ok()
                 .body(flagService.getCountryByFlag(codeFlags));
