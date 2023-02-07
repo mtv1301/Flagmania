@@ -1,6 +1,7 @@
 package springboot.example.gameofflags.service;
 
 import java.util.Optional;
+import lombok.extern.log4j.Log4j2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ import springboot.example.gameofflags.model.User;
 import springboot.example.gameofflags.repository.UserRepository;
 
 @Service
+@Log4j2
 public class UserService {
-    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -26,7 +27,7 @@ public class UserService {
         } else {
             User user = prepareUser(userRequestDto);
             userRepository.save(user);
-            LOG.info("User with " + userRequestDto.getEmail() + " was created.");
+            log.info("User with " + userRequestDto.getEmail() + " was created.");
         }
     }
 
