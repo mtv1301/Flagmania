@@ -2,6 +2,7 @@ package springboot.example.gameofflags.security;
 
 import java.util.Optional;
 import javax.naming.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import springboot.example.gameofflags.model.User;
 import springboot.example.gameofflags.repository.UserRepository;
@@ -16,11 +17,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public Optional<User> login(String email, String password) throws AuthenticationException {
-        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
-        if (user.isPresent()) {
+        boolean password_verified;
+        Optional<User> user = userRepository.findByEmail(email);
+        password_verified = BCrypt.checkpw(password, user.get().getPassword());
+        if (password_verified) {
             return user;
         } else {
-            throw new AuthenticationException("User with email: " + email + " was not registered.");
+            throw new AuthenticationException("The email: " + email + " or password: " + password + " is incorrect.");
         }
     }
 }
