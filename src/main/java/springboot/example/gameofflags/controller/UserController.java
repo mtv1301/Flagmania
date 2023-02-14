@@ -1,6 +1,5 @@
 package springboot.example.gameofflags.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,11 +14,13 @@ import springboot.example.gameofflags.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private UserMapper userMapper;
+    public UserController(UserService userService, UserMapper userMapper) {
+        this.userService = userService;
+        this.userMapper = userMapper;
+    }
 
     @PutMapping("/points")
     public void countPointsForUser(@RequestBody ChangePointsRequest request)

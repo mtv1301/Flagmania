@@ -9,5 +9,5 @@ import springboot.example.gameofflags.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
-    Optional<User> getUserById(Long id);
+    Optional<User> findByEmailAndPassword(String email, String password);
 }

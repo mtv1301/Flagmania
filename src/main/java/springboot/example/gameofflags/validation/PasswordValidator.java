@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PasswordValidator implements ConstraintValidator<Password, String> {
-    private static final String PASSWORD_PATTERN =
-            "^[a-zA-Z0-9_+&*-]+[a-zA-Z0-9_+&*-]$";
+    private static final String PASSWORD_PATTERN = "^[a-zA-Z0-9_+&*-]+[a-zA-Z0-9_+&*-]$";
 
     @Override
     public boolean isValid(String password, ConstraintValidatorContext constraintValidatorContext) {
