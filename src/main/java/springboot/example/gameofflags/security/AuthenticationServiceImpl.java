@@ -1,18 +1,26 @@
 package springboot.example.gameofflags.security;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.naming.AuthenticationException;
 import org.springframework.stereotype.Service;
 import springboot.example.gameofflags.model.User;
-import springboot.example.gameofflags.repository.AuthenticationRepository;
+import springboot.example.gameofflags.repository.UserRepository;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    @Autowired
-    private AuthenticationRepository authenticationRepository;
+    private final UserRepository userRepository;
+
+    public AuthenticationServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
-    public Optional<User> login(String email, String password) {
-        return authenticationRepository.findByEmailAndPassword(email, password);
+    public Optional<User> login(String email, String password) throws AuthenticationException {
+        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
+        if (user.isPresent()) {
+            return user;
+        } else {
+            throw new AuthenticationException("User with email: " + email + " was not registered.");
+        }
     }
 }
